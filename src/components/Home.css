@@ -1,0 +1,60 @@
+.text {
+    position: relative;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.second-text {
+    color: #5280ff;
+    font-weight: 800;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.second-text::after {
+    content: "|";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #5280ff;
+    animation: cursor-blink 0.7s infinite;
+}
+
+@keyframes cursor-blink {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.pingu:hover {
+    animation: pingu 1s infinite;
+
+}
+
+@keyframes pingu {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.expand:hover {
+
+    transform: scale(1.1);
+    /* Escala el elemento al 110% */
+    transition: transform 0.3s ease;
+    /* Agrega una transición suave */
+}
