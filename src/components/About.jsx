@@ -1,14 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useWindowSize } from "react-use";
 
 const About = () => {
   const handleDownloadResume = () => {
-    const link = document.createElement("a");
-    link.href = "/pdf/CV.pdf";
-    link.download = "CV.pdf";
-    link.click();
+    window.open("/pdf/CV.pdf", "_blank");
   };
+  const [showArrow, setShowArrow] = useState(true);
+  const useScrollPercentage = () => {
+    const { height: windowHeight } = useWindowSize();
+    const [scrollPercentage, setScrollPercentage] = useState(0);
 
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight =
+          document.documentElement.scrollHeight - windowHeight;
+        const newScrollPercentage = (scrollTop / documentHeight) * 100;
+
+        setScrollPercentage(newScrollPercentage);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [windowHeight]);
+
+    return scrollPercentage;
+  };
+  const scrollPercentage = useScrollPercentage();
+
+  useEffect(() => {
+    if (scrollPercentage >= 95) {
+      setShowArrow(false);
+    } else {
+      setShowArrow(true);
+    }
+  }, [scrollPercentage]);
   return (
     <>
       <article className="grid place-content-center overflow-hidden justify-center sm:max-w-[700px] sm:m-auto min-h-screen mx-5">
@@ -202,6 +233,11 @@ const About = () => {
             </a>
           </article>
         </section>
+        {showArrow && (
+          <div className="fixed bottom-5 right-10 text-4xl animate-bounce">
+            <i className="bx bx-down-arrow-alt"></i>
+          </div>
+        )}
 
         <Link className="my-20  w-24 expand " to="/">
           Go back

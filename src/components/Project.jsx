@@ -1,7 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { Link } from "react-router-dom";
+import { useWindowSize } from "react-use";
 const Project = () => {
+  const [showArrow, setShowArrow] = useState(true);
+  const useScrollPercentage = () => {
+    const { height: windowHeight } = useWindowSize();
+    const [scrollPercentage, setScrollPercentage] = useState(0);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight =
+          document.documentElement.scrollHeight - windowHeight;
+        const newScrollPercentage = (scrollTop / documentHeight) * 100;
+
+        setScrollPercentage(newScrollPercentage);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, [windowHeight]);
+
+    return scrollPercentage;
+  };
+  const scrollPercentage = useScrollPercentage();
+
+  useEffect(() => {
+    if (scrollPercentage >= 95) {
+      setShowArrow(false);
+    } else {
+      setShowArrow(true);
+    }
+  }, [scrollPercentage]);
   return (
     <article className="sm:max-w-[700px] sm:m-auto mx-5 min-h-screen overflow-hidden pt-5">
       <h1 className="text-3xl underline text-blue-400">My Projects</h1>
@@ -12,7 +47,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/ecommerce.png" alt="ecommerce" />
+          <img src="/images/ecommerce.png" loading="lazy" alt="ecommerce" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Ecommerce</h2>
@@ -35,7 +70,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/pokedex.png" alt="pokedex" />
+          <img src="/images/pokedex.png" loading="lazy" alt="pokedex" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Pokedex</h2>
@@ -59,7 +94,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/rick.png" alt="rick" />
+          <img src="/images/rick.png" loading="lazy" alt="rick" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">
@@ -86,7 +121,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/weather.png" alt="Weather" />
+          <img src="/images/weather.png" loading="lazy" alt="Weather" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Weather App</h2>
@@ -103,7 +138,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/phrase.png" alt="Phrases" />
+          <img src="/images/phrase.png" loading="lazy" alt="Phrases" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Phrases App</h2>
@@ -122,7 +157,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/pelicula.png" alt="Movies" />
+          <img src="/images/pelicula.png" loading="lazy" alt="Movies" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Movies App</h2>
@@ -139,7 +174,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/mapas.png" alt="Maps" />
+          <img src="/images/mapas.png" loading="lazy" alt="Maps" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Maps App</h2>
@@ -156,7 +191,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/youtube.png" alt="Youtube" />
+          <img src="/images/youtube.png" loading="lazy" alt="Youtube" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Youtube App</h2>
@@ -177,7 +212,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-2 items-center"
       >
         <div className="pl-3">
-          <img src="/images/juego.png" alt="Juego" />
+          <img src="/images/juego.png" loading="lazy" alt="Juego" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Ultifight</h2>
@@ -201,7 +236,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 mt-10 gap-2 border-l-blue-400 grid sm:grid-cols-1 items-center"
       >
         <div className="pl-3">
-          <img src="/images/ARASHA.jpg" alt="Arasha" />
+          <img src="/images/ARASHA.jpg" loading="lazy" alt="Arasha" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">Arasha</h2>
@@ -221,7 +256,7 @@ const Project = () => {
         className="expand duration-300 border-l-2 my-10 gap-2 border-l-blue-400 grid sm:grid-cols-1 items-center"
       >
         <div className="pl-3">
-          <img src="/images/UNI.png" alt="UTELVT" />
+          <img src="/images/UNI.png" loading="lazy" alt="UTELVT" />
         </div>
         <article className="pl-3 sm:pl-0 grid">
           <h2 className="text-2xl underline text-blue-400">
@@ -237,6 +272,11 @@ const Project = () => {
           </p>
         </article>
       </a>
+      {showArrow && (
+        <div className="fixed bottom-5 right-10 text-4xl animate-bounce">
+          <i className="bx bx-down-arrow-alt"></i>
+        </div>
+      )}
       <Link className="w-24 expand" to="/">
         Go back
       </Link>

@@ -53,10 +53,14 @@ const Home = () => {
 
   return (
     <article className="flex mx-10 relative items-center sm:max-w-[700px] sm:mx-auto justify-between place-content-center min-h-screen">
-      <header className="absolute top-10 gap-2 flex">
-        <span className="text first-text">I'm a</span>
+      <section className="absolute top-10 gap-2 flex">
+        <span className="text first-text">I'm </span>
+        <span className="text text-blue-500 font-extrabold">Jeimy Jara</span>
+      </section>
+      <section className="absolute top-20 gap-2 flex">
+        <span className="text first-text">I'm a </span>
         <span className="text second-text">{secondText}</span>
-      </header>
+      </section>
       <nav>
         <ul className="grid gap-8 sm:text-2xl text-center">
           <li className="expand  hover:bg-blue-500 py-2 px-3 transition-colors duration-300">
